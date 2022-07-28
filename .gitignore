@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Ignore FFMPEG for now
+ffmpeg/
+
+# Ignore files with JSON
+*.json
