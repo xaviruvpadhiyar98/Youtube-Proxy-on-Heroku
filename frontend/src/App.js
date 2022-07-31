@@ -1,51 +1,57 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import Card from "./components/Card";
+import PlayVideo from "./components/PlayVideo";
 
 const App = () => {
   const [search, setSearch] = useState("");
   const [showData, setShowData] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
   const searchRef = useRef();
-  const [data, setData] = useState([
-    {
-      id: 1,
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SVYohwunTozWvzUbLnSkJSq3lqpQOb9yJA&usqp=CAU",
-      title: "Video Title",
-      dec: "I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
-      link: "",
-    },
-    {
-      id: 2,
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SVYohwunTozWvzUbLnSkJSq3lqpQOb9yJA&usqp=CAU",
-      title: "Video Title",
-      dec: "I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
-      link: "",
-    },
-    {
-      id: 3,
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SVYohwunTozWvzUbLnSkJSq3lqpQOb9yJA&usqp=CAU",
-      title: "Video Title",
-      dec: "I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
-      link: "",
-    },
-    {
-      id: 2,
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SVYohwunTozWvzUbLnSkJSq3lqpQOb9yJA&usqp=CAU",
-      title: "Video Title",
-      dec: "I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
-      link: "",
-    },
-    {
-      id: 3,
-      thumbnail:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SVYohwunTozWvzUbLnSkJSq3lqpQOb9yJA&usqp=CAU",
-      title: "Video Title",
-      dec: "I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
-      link: "",
-    },
-  ]);
+  const [data, setData] = useState();
+  useEffect(() => {
+    setData([
+      {
+        id: 1,
+        thumbnail:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SVYohwunTozWvzUbLnSkJSq3lqpQOb9yJA&usqp=CAU",
+        title: "Video Title",
+        dec: "I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
+        link: "",
+      },
+      {
+        id: 2,
+        thumbnail:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SVYohwunTozWvzUbLnSkJSq3lqpQOb9yJA&usqp=CAU",
+        title: "Video Title",
+        dec: "I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
+        link: "",
+      },
+      {
+        id: 3,
+        thumbnail:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SVYohwunTozWvzUbLnSkJSq3lqpQOb9yJA&usqp=CAU",
+        title: "Video Title",
+        dec: "I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
+        link: "",
+      },
+      {
+        id: 4,
+        thumbnail:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SVYohwunTozWvzUbLnSkJSq3lqpQOb9yJA&usqp=CAU",
+        title: "Video Title",
+        dec: "I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
+        link: "",
+      },
+      {
+        id: 5,
+        thumbnail:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SVYohwunTozWvzUbLnSkJSq3lqpQOb9yJA&usqp=CAU",
+        title: "Video Title",
+        dec: "I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.",
+        link: "",
+      },
+    ]);
+  }, []);
   return (
     <div
       style={{
@@ -121,30 +127,19 @@ const App = () => {
             }}
           >
             {showData &&
-              data.map((i) => {
+              data.map((item) => {
                 return (
-                  <div
-                    className="card"
-                    style={{ maxHeight: 400, maxWidth: 300 }}
-                  >
-                    <div className="card-image">
-                      <img src={i.thumbnail} />
-                      <span
-                        style={{ color: "#222233", fontWeight: "bold" }}
-                        className="card-title"
-                      >
-                        {i.title}
-                      </span>
-                    </div>
-                    <div
-                      style={{ background: "#666699", color: "#aaccff" }}
-                      className="card-content"
-                    >
-                      <p>{i.dec}</p>
-                    </div>
-                  </div>
+                  <Card
+                    key={item.id}
+                    playVideo={() => {
+                      setShowVideo(true);
+                      console.log(showVideo);
+                    }}
+                    data={item}
+                  />
                 );
               })}
+            {showVideo && <PlayVideo closeVideo={() => setShowVideo(false)} />}
           </div>
         </div>
       </div>
