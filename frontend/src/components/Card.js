@@ -7,7 +7,7 @@ const Card = ({ data, playVideo }) => {
       style={{ maxHeight: 400, maxWidth: 300 }}
     >
       <div className="card-image">
-        <img src={data.thumbnail} alt="thumbnail" />
+        <img src={data.thumbnails[0]["url"]} alt="thumbnail" />
         <span
           style={{ color: "#222233", fontWeight: "bold" }}
           className="card-title"
@@ -19,7 +19,6 @@ const Card = ({ data, playVideo }) => {
         style={{ background: "#666699", color: "#aaccff" }}
         className="card-content"
       >
-        <p>{data.dec}</p>
       </div>
     </div>
   );
