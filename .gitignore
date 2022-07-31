@@ -132,4 +132,4 @@ dmypy.json
 ffmpeg/
 
 # Ignore files with JSON
-*.json
+# *.json
