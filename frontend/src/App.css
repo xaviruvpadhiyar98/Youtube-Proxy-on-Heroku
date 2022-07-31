@@ -1,0 +1,13 @@
+.search{
+    position: absolute;
+    transition: 10s;
+    top: 50%;
+    background-color: pink;
+}
+#search{
+    position: absolute;
+    transition: 10s;
+    top: 50%;
+    background-color: pink;
+
+}
