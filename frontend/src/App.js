@@ -2,7 +2,31 @@ import React, { useState, useRef, useEffect } from "react";
 import Card from "./components/Card";
 import PlayVideo from "./components/PlayVideo";
 
+
+
 const App = () => {
+
+  
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    searchRef.current.style.top = 0;
+    searchRef.current.style.transition = "1s";
+    const formData = new FormData()
+    formData.append("search", search)
+    console.log(formData)
+    const response = await fetch("http://localhost:5000/search/", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((response) => response)
+      .catch((error) => error);
+    setData(response)
+    setTimeout(() => { setShowData(true); }, 1000);
+    return response;
+  };
+
+
   const [search, setSearch] = useState("");
   const [showData, setShowData] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
@@ -69,20 +93,7 @@ const App = () => {
         }}
       >
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            // alert(search)
-            console.log(search);
-            console.log(searchRef.current);
-            // searchRef.current.style.position='absolute';
-            searchRef.current.style.top = 0;
-            // searchRef.current.style.left=0;
-            // searchRef.current.style.right=0;
-            searchRef.current.style.transition = "1s";
-            setTimeout(() => {
-              setShowData(true);
-            }, 1000);
-          }}
+          onSubmit={onSubmitHandler}
         >
           <div
             ref={searchRef}
